@@ -63,6 +63,9 @@ app.use((req, res, next) => {
 });
 
 // Routes
+app.get('/hi', (req, res) => {
+  return res.status(200).json("Hello from server")
+})
 app.use('/api/v1/users', userRoutes);
 
 app.all('*', (req, res, next) => {
