@@ -147,8 +147,10 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
   try {
     await sendEmail({
       email: user.email,
-      subject: 'Your Password reset token(valid for 10 mins)',
-      message
+      name: user.name,
+      subject: 'Sugar: Reset Your Password',
+      message,
+      resetToken: resetToken,
     });
     res.status(201).json({
       status: 'success',
@@ -159,7 +161,7 @@ exports.forgotPassword = catchAsync(async (req, res, next) => {
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     user.save({ validateBeforeSave: false });
-
+    console.log("err", err)
     return next(
       new AppError(
         'There was an error sending the email. Please try again after some time.',

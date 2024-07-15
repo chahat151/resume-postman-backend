@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-
+const cors = require('cors');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const userRoutes = require('./routes/userRoutes');
@@ -11,6 +11,9 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 
 const app = express();
+
+// Use CORS middleware
+app.use(cors());
 
 // 1) GLOBAL MIDDLEWARES
 // Set security HTTP headers
